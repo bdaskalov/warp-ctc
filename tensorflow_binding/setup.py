@@ -92,7 +92,8 @@ ext = setuptools.Extension('warpctc_tensorflow.kernels',
                            library_dirs = [warp_ctc_path],
                            runtime_library_dirs = [os.path.realpath(warp_ctc_path)],
                            libraries = ['warpctc'],
-                           extra_compile_args = extra_compile_args)
+                           extra_compile_args = extra_compile_args + tf.sysconfig.get_compile_flags(),
+                           extra_link_args =tf.sysconfig.get_link_flags())
 
 class build_tf_ext(orig_build_ext):
     def build_extensions(self):
